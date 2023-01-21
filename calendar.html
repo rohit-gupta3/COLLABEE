@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="calendar.css">
+</head>
+<body>
+    <form>
+        <fieldset>
+          <legend>
+            Select month, input year and click enter
+          </legend>
+          <ul class="form">
+            <li>
+              <label for="month">Month</label>
+              <select id="month" name="month"></select>
+            </li>
+            <li>
+              <label for="year">Year</label><input id="year" max="9999" min="1900" required type="number">
+            </li>
+            <li>
+              <button type="button">enter</button>
+            </li>
+          </ul>
+        </fieldset>
+      </form>
+      
+      <div class="calendar">
+        <h1>
+          <button class="prev btn">&lt;</button>
+          <span class="month-year"></span>
+          <button class="next btn">&gt;</button>
+        </h1>
+        <ul class="weekdays"></ul>
+        <ul class="days"></ul>
+      </div>
+      <footer></footer>
+      <a href="index.php" style="font-size:18px;float:right;">Back to Dashboard</a>
+      <script>
+            const selectMonth = document.querySelector("select");
+            const yearInput = document.querySelector("input");
+            const enterBtn = document.querySelector("button");
+
+            const timeNow = document.querySelector("footer");
+            const month_year = document.querySelector(".month-year");
+            const months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+            ];
+
+            // Populate month select button with options
+            for (let month of months) {
+            const option = document.createElement("option");
+            option.textContent = option.value = month;
+            selectMonth.appendChild(option);
+            }
+
+            // Display current calendar date on page load.
+            let now = new Date();
+            createCalendar(months[now.getMonth()], now.getFullYear());
+
+            // At the click of the enter button.
+            enterBtn.addEventListener("click", () => {
+            createCalendar(selectMonth.value, yearInput.value);
+            });
+
+            // Add event listener to date footer: return to today when clicked
+            timeNow.addEventListener("click", () => {
+            now = new Date();
+            createCalendar(months[now.getMonth()], now.getFullYear());
+            });
+
+            // Add event listener to prev and next month button
+
+            document.querySelector(".prev").addEventListener("click", () => {
+            const MonthYear = month_year.textContent.split(" ");
+            let month = MonthYear[0],
+                year = MonthYear[1];
+            let m = months.indexOf(month) - 1;
+
+            if (m < 0) {
+                year--;
+                createCalendar(months[11], year);
+            } else {
+                createCalendar(months[m], year);
+            }
+            });
+
+            document.querySelector(".next").addEventListener("click", () => {
+            const MonthYear = month_year.textContent.split(" ");
+            let month = MonthYear[0],
+                year = MonthYear[1];
+            let m = months.indexOf(month) + 1;
+
+            if (m > 11) {
+                year++;
+                createCalendar(months[0], year);
+            } else {
+                createCalendar(months[m], year);
+            }
+            });
+
+            // User input validation: disable enter btn if input invalid
+            yearInput.addEventListener("input", () => {
+            if (yearInput.validity.rangeUnderflow || yearInput.validity.rangeOverflow) {
+                yearInput.setCustomValidity("Input must be within 1900 and 9999");
+                yearInput.reportValidity();
+                enterBtn.disabled = true;
+            } else {
+                yearInput.setCustomValidity("");
+                enterBtn.disabled = false;
+            }
+            });
+
+            // Changes the time display on the red footer every second
+            setInterval(() => {
+            now = new Date();
+            timeNow.textContent = `NOW - ${now.toDateString()}, ${now.toLocaleTimeString()}`;
+            }, 1000);
+
+            //
+            function createCalendar(month, year) {
+            /* List out the number of days in month of year. */
+
+            // Validates inputs entered from the browser console. Just for debugging sakes.
+            if (!months.includes(month) || year < 1900 || year > 9999) {
+                console.log("Error in createCalendar: Invalid input.");
+                return;
+            }
+
+            // Update the values on the form
+            selectMonth.value = month;
+            yearInput.value = year;
+
+            month_year.textContent = `${month} ${year}`;
+
+            const weekdays = document.querySelector(".weekdays");
+            weekdays.innerHTML = "";
+            for (let i of ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]) {
+                const weekday = document.createElement("li");
+                weekday.textContent = i;
+                weekdays.appendChild(weekday);
+            }
+
+            let countdays = 0,
+                daysOfMonth,
+                flag = false;
+            // This loop counts the days from 1900 up to the month in the given year
+            for (let yyyy = 1900; yyyy <= year; yyyy++) {
+                for (let mm = 0; mm < 12; mm++) {
+                if (mm === 1) {
+                    // February
+                    if ((yyyy % 4 === 0 && yyyy % 100 !== 0) || yyyy % 400 === 0) {
+                    // Leap year
+                    daysOfMonth = 29;
+                    } else {
+                    // other year
+                    daysOfMonth = 28;
+                    }
+                } else if (mm === 8 || mm === 3 || mm === 5 || mm === 10) {
+                    daysOfMonth = 30;
+                } else {
+                    daysOfMonth = 31;
+                }
+                for (let dd = 1; dd <= daysOfMonth; dd++) {
+                    countdays++;
+                }
+                if (yyyy === Number(year) && mm === months.indexOf(selectMonth.value)) {
+                    flag = true;
+                    break;
+                }
+                }
+                if (flag) break;
+            }
+
+            const days = document.querySelector(".days");
+            days.innerHTML = "";
+            // Fill blank days of month
+            for (let i = 1; i <= (countdays - daysOfMonth) % 7; i++) {
+                const day = document.createElement("li");
+                day.textContent = "";
+                day.style.backgroundColor = "white";
+                day.style.borderColor = "lightgreen";
+                days.appendChild(day);
+            }
+            // Fill numbered days of month
+            for (let i = 1; i <= daysOfMonth; i++) {
+                const day = document.createElement("li");
+                day.textContent = i.toString();
+                days.appendChild(day);
+                if (
+                Number(year) === now.getFullYear() &&
+                month === months[now.getMonth()] &&
+                i === now.getDate()
+                ) {
+                day.style.backgroundColor = "orange";
+                day.style.border = "0";
+                }
+            }
+
+            console.log("All's good with createCalendar :)");
+            }
+
+            // -------------- end
+
+      </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+.header
+{
+    width:100%;
+    height: 100px;
+    background-color: rgb(195, 225, 225);
+    float:left;
+}
+.heading
+{
+    font-size: 48px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;    
+}
+.subheading
+{
+    font-size: 20px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic;
+}
+.moto
+{
+    font-size:14px;
+    margin-left: 200px;
+
+    font-style: italic;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.image
+{
+    width: 60%;
+    border-left: 10px;
+}
+.logincr
+{
+    text-align: center;
+    width:600px;
+    background-color: rgb(111, 106, 141);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-top: 15px;
+    color: white;
+    font-size: 25px;
+}
+p{
+    
+}
+.loginbutton
+{
+    background-color: rgb(255,215,6);
+    color:rgb(0,37,231);
+    font-size: larger;
+    text-shadow: 2px;
+    border:10px;
+}
+.loginbutton:hover{
+    background-color:red;
+    cursor: pointer;
+}
+.footer
+{
+    color:black;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size:large;
+    text-decoration:none;
+}
+a{
+    text-decoration:none;
+    padding:10px;
+}

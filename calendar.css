@@ -1,0 +1,140 @@
+body {
+    font-family: helvetica, arial, sans-serif;
+    padding: 0 20px;
+    min-width: 355px;
+    max-width: 600px;
+    margin: 10px auto;
+    height: 530px;
+    position: relative;
+  }
+  
+  .calendar {
+    font-family: cursive, Helvetica, sans-serif;
+  }
+  
+    h1 {
+      position: relative;
+      background-color: green;
+      padding: 10px;
+      text-align: center;
+      color: #fff;
+      border-radius: 20px 0;
+    }
+      .btn {
+        position: absolute;
+        top: 15px;
+        padding: 2px;
+        font-family: "Goudy Old Style", monospace;
+        font-size: 0.8em;
+        border: 2px solid;
+        border-radius: 5px;
+        text-shadow: 0 0 10px blue;
+        color: #5e5e5e;
+      }
+        &:active {
+          font-weight: 1000;
+          text-shadow: 2px 0 2px blue;
+        }
+  
+        &:hover {
+          background-color: #ccc;
+        }
+  
+      .prev {
+        left: 25px;
+      }
+  
+      .next {
+        right: 20px;
+      }
+  
+    ul {
+      list-style-type: none;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      padding-left: 0;
+    }
+      li:nth-child(7n) {
+        color: blue;
+      }
+  
+      li:nth-child(7n-1) {
+        color: red;
+      }
+    
+  
+    .weekdays {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-top: 2px solid;
+      border-bottom: 2px solid;
+      color: green;
+      padding: 5px;
+    }
+  
+    .days li {
+      text-align: right;
+      border: 2px solid green;
+      background-color: rgba(0, 200, 0, 0.1);
+      border-radius: 10px 0;
+      padding: 5px 30% 5px 5px;
+    }
+  
+    fieldset {
+      border-radius: 10px;
+      padding: 0 20px;
+    }
+  
+    legend {
+      background-color: black;
+      color: #ffffff;
+      padding: 8px;
+    }
+  
+    input:invalid:required {
+      background-color: lightpink;
+    }
+  
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+  
+    .form {
+      display: flex;
+      gap: 5px;
+    }
+      li {
+        flex: 1 auto;
+        background-color: lightgreen;
+  
+        button {
+          width: 100%;
+          height: 100%;
+        }
+  
+        label {
+          display: inline-block;
+          padding: 5px;
+        }
+      }
+  
+  footer {
+    display: inline;
+    font-family: Helvetica, monospace;
+    font-size: 12px;
+    padding: 3px;
+    text-decoration: underline;
+    color: red;
+    font-weight: 600;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+  }
+    &:hover {
+      cursor: pointer;
+      background-color: white;
+      text-decoration: none;
+    }
+  

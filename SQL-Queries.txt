@@ -1,0 +1,5 @@
+CREATE TABLE `collabee`.`projectdetails` (`ptitle` VARCHAR(50) NOT NULL , `phead` VARCHAR(50) NOT NULL , `budget` DOUBLE NOT NULL , `doc` DATE NOT NULL , `pdetail` VARCHAR(500) NOT NULL , `deliverable1` VARCHAR(250) NOT NULL , `date1` DATE NOT NULL , `deliverable2` VARCHAR(250) NOT NULL , `date2` DATE NOT NULL , `deliverable3` VARCHAR(250) NOT NULL , `date3` DATE NOT NULL , PRIMARY KEY (`ptitle`));
+
+CREATE TABLE `collabee`.`expensedetail` (`ptitle` VARCHAR(50) NOT NULL , `person` VARCHAR(50) NOT NULL , `spendedon` VARCHAR(50) NOT NULL , `detail` VARCHAR(500) NOT NULL , `date` DATE NOT NULL , `invoice` VARCHAR(20) NOT NULL , `amount` INT NOT NULL )
+
+CREATE TABLE `collabee`.`activity` (`ptitle` VARCHAR(50) NOT NULL , `deliverable` VARCHAR(100) NOT NULL , `date` DATE NOT NULL , `detail` VARCHAR(500) NOT NULL )
